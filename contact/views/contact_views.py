@@ -35,6 +35,7 @@ def contact(request: HttpRequest, contact_id: int):
 
     return render(request, 'contact/contact.html', context)
 
+
 def search(request: HttpRequest):
     # search_value = request.GET['q']
     search_value = request.GET.get('q', '').strip()
