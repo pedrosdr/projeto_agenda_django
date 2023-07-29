@@ -2,11 +2,16 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, Http404
 from contact.models import Contact
 from django.db.models import Q
+from django.core.paginator import Paginator
+
 
 def index(request: HttpRequest):
     contacts = Contact.objects\
         .filter(show=True)\
-        .order_by('-id')[20:30]
+        .order_by('-id')
+    
+    page = request.GET.get('page', '1')
+    contacts = Paginator(contacts, 10).get_page(page)
 
     context = {
         'contacts': contacts,
@@ -41,10 +46,14 @@ def search(request: HttpRequest):
         .filter(show=True)\
         .filter(Q(first_name__icontains=search_value) | Q(last_name__icontains=search_value))\
         .order_by('-id')
+    
+    page = request.GET.get('page', '1')
+    contacts = Paginator(contacts, 10).get_page(page)
 
     context = {
         'contacts': contacts,
-        'page_title': 'Agenda'
+        'page_title': 'Agenda',
+        'search_value': search_value
     }
 
     return render(request, 'contact/index.html', context)

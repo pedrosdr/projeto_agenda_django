@@ -1,7 +1,7 @@
 {% extends 'global/base.html' %}
 
 {% block content %}
-    <h1>Test</h1>
+{% if contacts %}
     <div class="responsive-table">
         <table class="contacts-table">
             <caption class="table-caption">
@@ -41,4 +41,13 @@
             </tbody>
         </table>
     </div>
+{% else %}
+    <div class="single-contact">
+        <h2 class="single-contact-name">
+            No contact found
+        </h2>
+    </div>
+{% endif %}
+
+{% include 'global/partials/_pagination.html' %}
 {% endblock content %}

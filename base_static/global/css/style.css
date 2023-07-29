@@ -312,3 +312,20 @@
     filter: brightness(80%);
     box-shadow: 0 0 5px var(--link-dark-color);
   }
+
+  /* Pagination */
+
+  .pagination .step-links .page-btn a {
+    color: black;
+    display: inline-block;
+    padding: 0.2rem 1rem;
+    background-color: #aeaee6;
+    border-radius: 0.3rem;
+    transition: all 0.1s ease-in-out;
+  }
+
+  .pagination .step-links .page-btn a:hover,
+  .pagination .step-links .page-btn.current a {
+    color: white;
+    background-color: #4d4df5;
+  }
