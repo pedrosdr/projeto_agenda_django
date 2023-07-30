@@ -329,3 +329,21 @@
     color: white;
     background-color: #4d4df5;
   }
+
+  /* Contact links */
+  
+  .contact-links {
+    margin-block: calc(var(--small-font-size) * 2);
+    display: flex;
+    align-items: center;
+    gap: 0 var(--small-font-size);
+  }
+
+  .btn-link {
+    font-size: var(--small-font-size);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 1rem;
+    display: block;
+    line-height: var(--small-font-size);
+  }
