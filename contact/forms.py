@@ -4,20 +4,21 @@ from django.core.exceptions import ValidationError
 
 
 class ContactForm(forms.ModelForm):
-    first_name = forms.CharField(
-        widget=forms.TextInput(
-            {
-                'class': 'classe-a classe-b',
-                'placeholder': 'Aqui veio da classe'
-            }
-        ),
-        label='Primeiro Nome',
-        help_text='Texto de ajuda para eu usuário'
-    )
+    # first_name = forms.CharField(
+    #     widget=forms.TextInput(
+    #         {
+    #             'class': 'classe-a classe-b',
+    #             'placeholder': 'Aqui veio da classe'
+    #         }
+    #     ),
+    #     label='Primeiro Nome',
+    #     help_text='Texto de ajuda para eu usuário'
+    # )
 
     class Meta:
         model = Contact
-        fields = ('first_name', 'last_name', 'phone', 'description')
+        fields = ('first_name', 'last_name', 'phone', 
+                  'email', 'description', 'category')
         # widgets = {
         #     'first_name': forms.TextInput({
         #         'class': 'class-a class-b'
@@ -37,10 +38,10 @@ class ContactForm(forms.ModelForm):
     def clean_first_name(self):
         first_name: str = self.cleaned_data.get('first_name')
         
-        if first_name.upper() in ['ATC', 'BOI', 'UTA']:
-            self.add_error(
-                'first_name',
-                ValidationError("Don't use bad words.")
-            )
+        # if first_name.upper() in ['ATC', 'BOI', 'UTA']:
+        #     self.add_error(
+        #         'first_name',
+        #         ValidationError("Don't use bad words.")
+        #     )
 
         return first_name

@@ -12,5 +12,7 @@
         <p><b>Created Date: </b> {{ contact.created_date }}</p>
         <p><b>Description: </b> {{ contact.description }}</p>
         <p><b>Category: </b> {{ contact.category.name }}</p>
+
+        <a href="{% url 'contact:update' contact.id %}" class="update-btn">Update</a>
     </div>
 {% endblock content %}
