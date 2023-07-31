@@ -10,7 +10,7 @@ def create(request: HttpRequest):
     form_action = reverse('contact:create')
 
     if request.method.upper() == 'POST':
-        form = ContactForm(request.POST)
+        form = ContactForm(request.POST, request.FILES)
 
         context = {
             'form': form,
@@ -19,7 +19,7 @@ def create(request: HttpRequest):
 
         if form.is_valid():
             contact = form.save()
-            return redirect('contact:update', contact_id=contact.pk)
+            return redirect('contact:contact', contact_id=contact.pk)
 
         return render(
         request,
@@ -46,7 +46,7 @@ def update(request: HttpRequest, contact_id: int):
 
     if request.method.upper() == 'POST':
         print('valid')
-        form = ContactForm(request.POST, instance=contact)
+        form = ContactForm(request.POST, request.FILES, instance=contact)
         context = {
             'form': form,
             'form_action': form_action
@@ -71,4 +71,22 @@ def update(request: HttpRequest, contact_id: int):
         request,
         'contact/create.html',
         context
+    )
+
+
+def delete(request: HttpRequest, contact_id: int):
+    contact = Contact.objects.filter(pk=contact_id, show=True).first()
+    confirmation = request.POST.get('confirmation', 'no')
+
+    if confirmation == 'yes':
+        contact.delete()
+        return redirect('contact:index')
+
+    return render(
+        request,
+        'contact/contact.html',
+        {
+            'contact': contact,
+            'confirmation': confirmation
+        }
     )

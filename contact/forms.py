@@ -1,24 +1,26 @@
 from contact.models import Contact
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.forms import UserCreationForm
+
+
+class RegisterForm(UserCreationForm):
+    ...
 
 
 class ContactForm(forms.ModelForm):
-    # first_name = forms.CharField(
-    #     widget=forms.TextInput(
-    #         {
-    #             'class': 'classe-a classe-b',
-    #             'placeholder': 'Aqui veio da classe'
-    #         }
-    #     ),
-    #     label='Primeiro Nome',
-    #     help_text='Texto de ajuda para eu usuário'
-    # )
+    picture = forms.ImageField(
+        widget=forms.FileInput(
+            attrs={
+                'accept': 'image/*'
+            }
+        )
+    )
 
     class Meta:
         model = Contact
         fields = ('first_name', 'last_name', 'phone', 
-                  'email', 'description', 'category')
+                  'email', 'description', 'category', 'picture')
         # widgets = {
         #     'first_name': forms.TextInput({
         #         'class': 'class-a class-b'
