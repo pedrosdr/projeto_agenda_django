@@ -90,3 +90,13 @@ def delete(request: HttpRequest, contact_id: int):
             'confirmation': confirmation
         }
     )
+
+
+def login_view(request: HttpRequest):
+    return render(
+        request,
+        'contact/login.html',
+        {
+            'form': 'form'
+        }
+    )
