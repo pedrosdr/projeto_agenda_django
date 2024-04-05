@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 
 
 def index(request: HttpRequest):
+
     contacts = Contact.objects\
         .filter(show=True)\
         .order_by('-id')
